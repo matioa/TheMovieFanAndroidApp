@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jataka.themoviefan">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,8 +18,7 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="Log In"></activity>
-        <activity android:name=".RegisterActivity"></activity>
+            android:label="Log In"/>
+        <activity android:name=".RegisterActivity"/>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

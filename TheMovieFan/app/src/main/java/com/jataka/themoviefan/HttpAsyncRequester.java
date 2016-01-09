@@ -35,13 +35,40 @@ public class HttpAsyncRequester extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
 
+        String path = "https://api.parse.com/1/users";
 
-        return "";
+        StringBuilder result = new StringBuilder();
+        URL url;
+        HttpURLConnection urlConnection = null;
+        try {
+            url = new URL(path);
+
+            urlConnection = (HttpURLConnection) url
+                    .openConnection();
+
+            InputStream in = urlConnection.getErrorStream();
+
+            InputStreamReader isw = new InputStreamReader(in);
+            int data = isw.read();
+            while (data != -1) {
+                char current = (char) data;
+                data = isw.read();
+                result.append(current);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            urlConnection.disconnect();
+        }
+
+        //print result
+        return result.toString();
     }
 
     @Override
     protected void onPostExecute(String result) {
-
+        String a = result;
+        char s = a.charAt(4);
     }
 
     private String getStringByResponse(InputStream inputStream) throws IOException {
