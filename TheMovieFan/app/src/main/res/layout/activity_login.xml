@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:text="Register"
         android:id="@+id/goToRegisterBtn"
-
         android:layout_gravity="right"
-        android:textColor="#3156da" />
+        android:textColor="#3156da"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </LinearLayout>
