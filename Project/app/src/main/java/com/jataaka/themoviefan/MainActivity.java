@@ -76,15 +76,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.home_page:
                 viewPager.setCurrentItem(GlobalConstants.HomeFragmentIndex);
-                TextView sqlText;
-
-                // sample insert and retreive of data from the SQLite database
-                DbActions db = new DbActions(getApplicationContext());
-                db.addRecord("someId", "sampleUser");
-
-                sqlText = (TextView) findViewById(R.id.text_view);
-                Cursor resultData = db.getValues();
-                sqlText.setText(resultData.getColumnName(0));
                 break;
             case R.id.favorites:
                 viewPager.setCurrentItem(GlobalConstants.FavoritesFragmentIndex);
