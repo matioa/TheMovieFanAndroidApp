@@ -1,2 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1_c53612e97048e115acc8a630a0a1f4d60cde5d87.jar" />
+    </item>
+    <item
+        jar="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-23.1.1_3a7a4f49c7cf4911c0158e563596004ac965cab2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Martin\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1_3fd842a0c125f505398b3d95ab7c4b89da4119e1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.1.1_a36f35e9cdae8f71d0288462aac203a8f679356e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\exploded-aar\Project\volley\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d180218a1460aabd3ce68aa9ff3fb4a878ab0445">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\Project-volley-unspecified_8cebcb9e6a2d8c9cae2613b54bae89e1bf1e9d0c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\exploded-aar\com.android.support\design\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="379471b2bd17d9737c050345c08e8c7d16589784">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\com.android.support-design-23.1.1_c46b4a3481086c8d71540e849872c25f1d7d2510.jar" />
+    </item>
+    <item
+        jar="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
+        <dex dex="C:\Users\Martin\Desktop\TheMovieFanAndroidApp\Project\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.1.1_3366e1e6a90161cea5cf4ba32d892f0c57657fa5.jar" />
+    </item>
+
+</items>
