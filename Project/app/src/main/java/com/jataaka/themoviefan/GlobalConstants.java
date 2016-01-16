@@ -27,12 +27,22 @@ public class GlobalConstants {
     public static final String HEADER_APP_ID_NAME = "X-Parse-Application-Id";
     public static final String HEADER_APP_ID_VALUE = "7G5mP5LoSpeEkuxMc6UGRHFsgt64EFGvkCH29trM";
 
+
+
     public static final String HEADER_RESTAPI_KEY_NAME = "X-Parse-REST-API-Key";
     public static final String HEADER_RESTAPI_KEY_VALUE = "nVt0bLmNE237BCDMESxTEK2JHKnHprDeUEY6X96s";
 
     public static final String REGISTER_USER_ENDPOINT = "https://api.parse.com/1/users";
     public static final String REGISTER_USER_METHOD = "POST";
 
+    public static final String HEADER_TMDB_API_KEY_NAME = "api_key";
+    public static final String HEADER_TMDB_API_KEY_VALUE = "9bcc7d5492fb90c523ac4607906011eb";
+
+
     public static final String LOGIN_USER_ENDPOINT = "https://api.parse.com/1/login?username=%s&password=%s";
+    public static final String MOVIES_POPULAR_ENDPOINT = "http://api.themoviedb.org/3/movie/popular?%s=%s";
+
     public static final int LOGIN_USER_METHOD = Request.Method.GET;
+    public static final int MOVIES_POPULAR_METHOD = Request.Method.GET;
+
 }
