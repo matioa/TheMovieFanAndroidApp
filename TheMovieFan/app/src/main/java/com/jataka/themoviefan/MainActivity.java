@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //if not logged in
-        Intent logInIntent = new Intent(this, LoginActivity.class);
+        Intent logInIntent = new Intent(this, LoginActivity2.class);
         this.startActivity(logInIntent);
 
         // sample insert and retreive of data from the SQLite database
