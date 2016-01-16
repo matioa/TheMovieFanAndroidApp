@@ -1,5 +1,6 @@
 package com.jataaka.themoviefan;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,13 +11,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.jataaka.themoviefan.data.DbActions;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -32,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(GlobalConstants.HomeFragmentIndex);
     }
 
     @Override
@@ -69,6 +76,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id) {
             case R.id.home_page:
                 viewPager.setCurrentItem(GlobalConstants.HomeFragmentIndex);
+                TextView sqlText;
+
+                // sample insert and retreive of data from the SQLite database
+                DbActions db = new DbActions(getApplicationContext());
+                db.addRecord("someId", "sampleUser");
+
+                sqlText = (TextView) findViewById(R.id.text_view);
+                Cursor resultData = db.getValues();
+                sqlText.setText(resultData.getColumnName(0));
                 break;
             case R.id.favorites:
                 viewPager.setCurrentItem(GlobalConstants.FavoritesFragmentIndex);
