@@ -18,6 +18,7 @@ import com.jataaka.themoviefan.data.DbActions;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ViewPager viewPager;
+    boolean isLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
-        viewPager.setCurrentItem(GlobalConstants.HomeFragmentIndex);
     }
 
     @Override
