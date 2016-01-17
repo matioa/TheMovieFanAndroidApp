@@ -1,13 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.jataaka.themoviefan.fragments.AboutFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="about" />
+        android:layout_height="wrap_content"
+        android:text="by Jataaka TEAM!"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="65dp"
+        android:gravity="center_horizontal"
+        android:textSize="40dp"
+        android:id="@+id/textView2" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="githubProfile"
+        android:gravity="center_horizontal"
+        android:textSize="40dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

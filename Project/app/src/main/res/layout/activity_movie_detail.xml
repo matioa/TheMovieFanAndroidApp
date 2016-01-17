@@ -31,4 +31,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 
+<<<<<<< HEAD
 </android.support.design.widget.CoordinatorLayout>
+=======
+</android.support.design.widget.CoordinatorLayout>
+>>>>>>> origin/master

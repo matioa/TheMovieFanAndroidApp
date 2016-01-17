@@ -1,6 +1,5 @@
 package com.jataaka.themoviefan;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,39 +10,40 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jataaka.themoviefan.data.DbActions;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    ViewPager viewPager;
-    boolean isLoggedIn;
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, User.OnStatusChangeListener {
+    private ViewPager viewPager;
+    private NavigationView navigationView;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        this.setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        this.setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) this.findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        this.navigationView = (NavigationView) this.findViewById(R.id.nav_view);
+        this.navigationView.setNavigationItemSelectedListener(this);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
+        this.viewPager = (ViewPager) this.findViewById(R.id.view_pager);
+        MyPagerAdapter adapter = new MyPagerAdapter(this.getSupportFragmentManager());
+        this.viewPager.setAdapter(adapter);
+
+        this.user = new User(this);
+        this.user.setOnStatusChangeListener(this);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) this.findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
+        this.getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -75,34 +75,59 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.home_page:
-                viewPager.setCurrentItem(GlobalConstants.HomeFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.HomeFragmentIndex);
                 break;
             case R.id.favorites:
-                viewPager.setCurrentItem(GlobalConstants.FavoritesFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.FavoritesFragmentIndex);
                 break;
             case R.id.watchlist:
-                viewPager.setCurrentItem(GlobalConstants.WatchlistFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.WatchlistFragmentIndex);
                 break;
             case R.id.logout:
-                viewPager.setCurrentItem(GlobalConstants.LogoutFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.LogoutFragmentIndex);
                 break;
             case R.id.login:
-                viewPager.setCurrentItem(GlobalConstants.LoginFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.LoginFragmentIndex);
+                break;
+            case R.id.register:
+                this.viewPager.setCurrentItem(GlobalConstants.RegisterFragmentIndex);
                 break;
             case R.id.settings:
-                viewPager.setCurrentItem(GlobalConstants.SettingsFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.SettingsFragmentIndex);
                 break;
             case R.id.about:
-                viewPager.setCurrentItem(GlobalConstants.AboutFragmentIndex);
+                this.viewPager.setCurrentItem(GlobalConstants.AboutFragmentIndex);
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) this.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    @Override
+    public void onStatusChangeListener(boolean isLoggedIn) {
+        this.navigationView.getMenu().findItem(R.id.favorites).setVisible(isLoggedIn);
+        this.navigationView.getMenu().findItem(R.id.watchlist).setVisible(isLoggedIn);
+        this.navigationView.getMenu().findItem(R.id.logout).setVisible(isLoggedIn);
+
+        this.navigationView.getMenu().findItem(R.id.register).setVisible(!isLoggedIn);
+        this.navigationView.getMenu().findItem(R.id.login).setVisible(!isLoggedIn);
+    }
+
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void loginUser(String username, String token) {
+        this.user.loginUser(username, token);
+    }
+
+    public void logoutUser() {
+        this.user.logoutUser();
+    }
+
+    public void navigateViewPagerTo(int fragmentIndex) {
+        this.viewPager.setCurrentItem(fragmentIndex);
     }
 }

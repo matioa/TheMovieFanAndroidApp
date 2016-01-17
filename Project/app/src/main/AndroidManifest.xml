@@ -23,7 +23,11 @@
         </activity>
         <activity android:name=".EmptyActivityExample" />
         <activity
+<<<<<<< HEAD
+            android:name=".MovieDetailActivity"
+=======
             android:name=".MovieDetail"
+>>>>>>> origin/master
             android:label="@string/title_activity_movie_detail"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
