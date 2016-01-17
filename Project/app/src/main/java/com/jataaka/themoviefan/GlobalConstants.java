@@ -38,7 +38,12 @@ public class GlobalConstants {
     public static final String HEADER_TMDB_API_KEY_VALUE = "9bcc7d5492fb90c523ac4607906011eb";
 
 
+    public static final String HEADER_TMDB_API_KEY_NAME = "api_key";
+    public static final String HEADER_TMDB_API_KEY_VALUE = "9bcc7d5492fb90c523ac4607906011eb";
+
+
     public static final String LOGIN_USER_ENDPOINT = "https://api.parse.com/1/login?username=%s&password=%s";
+<<<<<<< HEAD
     public static final String MOVIES_POPULAR_ENDPOINT = "http://api.themoviedb.org/3/movie/popular?%s=%s&page=%d";
 
     public static final int LOGIN_USER_METHOD = Request.Method.GET;
@@ -46,4 +51,11 @@ public class GlobalConstants {
     public static final String SAVED_USERNAME_KEY = "username";
     public static final String SAVED_TOKEN_KEY = "token";
     public static final int MOVIES_POPULAR_METHOD = Request.Method.GET;
+=======
+    public static final String MOVIES_POPULAR_ENDPOINT = "http://api.themoviedb.org/3/movie/popular?%s=%s";
+
+    public static final int LOGIN_USER_METHOD = Request.Method.GET;
+    public static final int MOVIES_POPULAR_METHOD = Request.Method.GET;
+
+>>>>>>> origin/master
 }
