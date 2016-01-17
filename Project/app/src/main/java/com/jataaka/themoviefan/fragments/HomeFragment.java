@@ -71,6 +71,7 @@ public class HomeFragment extends Fragment {
                   } catch (JSONException e) {
                       e.printStackTrace();
                   }
+                  adapter.notifyDataSetChanged();
               }
           }, new Response.ErrorListener() {
 
