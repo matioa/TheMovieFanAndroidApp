@@ -102,7 +102,7 @@ public class CustomListAdapter extends BaseAdapter {
         title.setText(m.getTitle());
 
         // rating
-        rating.setText("Rating: " + String.valueOf(m.getRating()));
+        rating.setText(String.valueOf(m.getRating()));
         overview.setText(m.getOverview());
 
         return convertView;

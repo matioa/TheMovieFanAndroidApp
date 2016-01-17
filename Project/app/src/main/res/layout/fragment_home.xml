@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.jataaka.themoviefan.fragments.HomeFragment">
 
-
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="home" />
-
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
