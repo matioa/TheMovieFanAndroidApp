@@ -1,60 +1,50 @@
 package com.jataaka.themoviefan.fragments;
 
-import android.app.Activity;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.jataaka.themoviefan.CustomListAdapter;
 import com.jataaka.themoviefan.GlobalConstants;
 import com.jataaka.themoviefan.HttpRequestQueue;
 import com.jataaka.themoviefan.MainActivity;
 import com.jataaka.themoviefan.R;
-import com.jataaka.themoviefan.data.DbActions;
+import com.jataaka.themoviefan.model.Movie;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeFragment extends Fragment {
-    ImageView mImageView;
-
-
+//    ImageView mImageView;
+//
     ListView list;
-    String[] itemname ={
-            "Safari",
-            "Camera",
-            "Global",
-            "FireFox",
-            "UC Browser",
-            "Android Folder",
-            "VLC Player",
-            "Cold War"
-    };
+//    ArrayList<HashMap<String, String>> mylist = new ArrayList<HashMap<String, String>>();
+//    List<String> id = new ArrayList<>();
+//    List<String>  title= new ArrayList<>();
+//    List<String>  overview= new ArrayList<>();
+//    List<String>  posterUrl= new ArrayList<>();
+//    List<String>  rating= new ArrayList<>();
+//    List<Bitmap> image = new ArrayList<>();
 
-    Integer[] imgid={
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-            R.drawable.ic_test_image,
-    };
+    private List<Movie> movieList = new ArrayList<Movie>();
+    private ListView listView;
+    private CustomListAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,15 +56,35 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final TextView mTxtDisplay = (TextView) view.findViewById(R.id.text_view);
-        String endpoint = String.format(GlobalConstants.MOVIES_POPULAR_ENDPOINT,GlobalConstants.HEADER_TMDB_API_KEY_NAME, GlobalConstants.HEADER_TMDB_API_KEY_VALUE);
+//        final TextView mTxtDisplay = (TextView) view.findViewById(R.id.text_view);
+        String url = String.format(GlobalConstants.MOVIES_POPULAR_ENDPOINT,GlobalConstants.HEADER_TMDB_API_KEY_NAME, GlobalConstants.HEADER_TMDB_API_KEY_VALUE);
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, endpoint, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(JSONObject response) {
-                        mTxtDisplay.setText("Response: " + response.toString());
+                    public void onResponse(JSONObject response){
+                        JSONArray movies;
+                        try {
+                            movies = response.getJSONArray("results");
+                            for (int i = 0; i < movies.length(); i++) {
+                                JSONObject obj  = movies.getJSONObject(i);
+                                Movie movie = new Movie();
+                                movie.setTitle(obj.getString("title"));
+                                movie.setOverview(obj.getString("overview"));
+                                String imgUrl = "http://image.tmdb.org/t/p/w300"+obj.getString("poster_path");
+                                movie.setThumbnailUrl(imgUrl);
+                                movie.setRating(((Number) obj.get("vote_average"))
+                                        .doubleValue());
+
+                                // adding movie to movies array
+                                movieList.add(movie);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 }, new Response.ErrorListener() {
 
@@ -85,21 +95,25 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+
         // Access the RequestQueue through your singleton class.
         HttpRequestQueue.getInstance(view.getContext()).addToRequestQueue(jsObjRequest);
 
+    listView = (ListView) view.findViewById(R.id.list);
+    adapter = new CustomListAdapter((MainActivity)view.getContext(), movieList);
+    listView.setAdapter(adapter);
 
-        CustomListAdapter adapter=new CustomListAdapter((MainActivity)view.getContext(), itemname, imgid);
-        list=(ListView)view.findViewById(R.id.list);
-        list.setAdapter(adapter);
-
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        CustomListAdapter adapter=new CustomListAdapter((MainActivity)view.getContext(), title, rating, image);
+//        list=(ListView)view.findViewById(R.id.list);
+//        list.setAdapter(adapter);
+//
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                String Slecteditem = itemname[+position];
+                String Slecteditem = movieList.get(+position).getTitle();
                 Toast.makeText(view.getContext().getApplicationContext(), Slecteditem, Toast.LENGTH_SHORT).show();
 
             }
