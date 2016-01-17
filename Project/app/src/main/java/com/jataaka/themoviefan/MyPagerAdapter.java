@@ -3,12 +3,14 @@ package com.jataaka.themoviefan;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import com.jataaka.themoviefan.fragments.AboutFragment;
 import com.jataaka.themoviefan.fragments.FavoritesFragment;
 import com.jataaka.themoviefan.fragments.HomeFragment;
 import com.jataaka.themoviefan.fragments.LoginFragment;
 import com.jataaka.themoviefan.fragments.LogoutFragment;
+import com.jataaka.themoviefan.fragments.RegisterFragment;
 import com.jataaka.themoviefan.fragments.SettingsFragment;
 import com.jataaka.themoviefan.fragments.WatchlistFragment;
 
@@ -22,6 +24,8 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+
+
         switch (position){
             case GlobalConstants.HomeFragmentIndex:
                 return new HomeFragment();
@@ -37,13 +41,17 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
                 return new SettingsFragment();
             case GlobalConstants.AboutFragmentIndex:
                 return new AboutFragment();
-            default:
-                return null;
+            case GlobalConstants.RegisterFragmentIndex:
+                return new RegisterFragment();
         }
+
+        return null;
     }
+
+
 
     @Override
     public int getCount() {
-        return 7;
+        return 8;
     }
 }
