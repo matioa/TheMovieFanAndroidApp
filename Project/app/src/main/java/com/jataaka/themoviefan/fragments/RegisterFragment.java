@@ -68,14 +68,17 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
 
         if (username.isEmpty()){
             this.mainActivity.showMessage(GlobalConstants.USERNAME_REQUIRED_EN);
+            return;
         }
 
         if (password.isEmpty()){
             this.mainActivity.showMessage(GlobalConstants.PASSWORD_REQUIRED_EN);
+            return;
         }
 
         if (password.compareTo(passwordConfirm) != 0) {
             this.mainActivity.showMessage(GlobalConstants.PASSWORDS_NOT_MATCH_EN);
+            return;
         }
 
         JSONObject jsonBody = null;

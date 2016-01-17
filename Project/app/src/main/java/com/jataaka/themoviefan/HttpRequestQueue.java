@@ -8,6 +8,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.jataaka.themoviefan.util.LruBitmapCache;
 
 /**
  * Created by nikola on 16/01/2016.
@@ -61,6 +62,11 @@ public class HttpRequestQueue {
     }
 
     public ImageLoader getImageLoader() {
-        return mImageLoader;
+        getRequestQueue();
+        if (mImageLoader == null) {
+            mImageLoader = new ImageLoader(this.mRequestQueue,
+                    new LruBitmapCache());
+        }
+        return this.mImageLoader;
     }
 }
