@@ -1,0 +1,43 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jataaka TEAM!"
+        android:gravity="center_horizontal"
+        android:textSize="40dp"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="?attr/colorPrimary"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nikola"
+        android:gravity="center_horizontal"
+        android:textSize="40dp"
+        android:background="#ffffff"
+        android:textColor="#6f8de0"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="88dp"
+        android:id="@+id/go_to_nikola" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Martin"
+        android:gravity="center_horizontal"
+        android:textSize="40dp"
+        android:background="#ffffff"
+        android:textColor="#6f8de0"
+        android:id="@+id/go_to_martin"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
