@@ -120,8 +120,14 @@ public class RegisterFragment extends Fragment implements View.OnClickListener, 
     }
 
     @Override
-    public void onErrorResponse(VolleyError error) {
-
+    public void onErrorResponse(VolleyError error)  {
+        String errorMessage = new String(error.networkResponse.data);
+        try {
+            JSONObject errorJson = new JSONObject(errorMessage);
+            this.mainActivity.showMessage(errorJson.getString("error"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

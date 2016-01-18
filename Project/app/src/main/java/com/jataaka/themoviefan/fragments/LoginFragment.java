@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -102,7 +103,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener, Res
     }
 
     @Override
-    public void onErrorResponse(VolleyError error) {
+    public void onErrorResponse(VolleyError error)  {
+        String errorMessage = new String(error.networkResponse.data);
+        try {
+            JSONObject errorJson = new JSONObject(errorMessage);
+            this.mainActivity.showMessage(errorJson.getString("error"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
