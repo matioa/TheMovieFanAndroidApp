@@ -13,19 +13,19 @@ public class DbActions extends DbInit {
         super(context);
     }
 
-    public void addRecord(String movieId, String user){
+    public void addRecord(String entry, String user){
         open();
         ContentValues values = new ContentValues();
-        values.put(DbContract.FanNotesEntry.COLUMN_NAME_MOVIE_ID, movieId);
+        values.put(DbContract.FanNotesEntry.COLUMN_NAME_ENTRY, entry);
         values.put(DbContract.FanNotesEntry.COLUMN_NAME_USER, user);
         this.db.insert(DbContract.FanNotesEntry.TABLE_NAME, null, values);
         close();
     }
 
-    public Cursor getValues(){
+    public Cursor getValues(String username){
         String table = DbContract.FanNotesEntry.TABLE_NAME;
-        String[] columns = new String[]{DbContract.FanNotesEntry.COLUMN_NAME_MOVIE_ID, DbContract.FanNotesEntry.COLUMN_NAME_USER};
-        String selection = null;
+        String[] columns = new String[]{DbContract.FanNotesEntry.COLUMN_NAME_ENTRY};
+        String selection = String.format("username=\"%s\"",username);
         String[] selectionArgs = null;
         String groupBy = null;
         String having = null;

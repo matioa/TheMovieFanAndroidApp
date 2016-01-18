@@ -13,11 +13,8 @@ public final class DbContract {
 
     // Table FanNotes
     public static abstract class FanNotesEntry implements BaseColumns {
-        public static final String TABLE_NAME = "favoriteMovies";
-        public static final String COLUMN_NAME_MOVIE_ID = "movieId";
+        public static final String TABLE_NAME = "autocomplete";
         public static final String COLUMN_NAME_USER = "username";
-        public static final String COLUMN_NAME_DATE_ADDED = "dateAdded";
-        public static final String COLUMN_NAME_RATING = "rating";
-        public static final String COLUMN_NAME_IMG_URL = "imgUrl";
+        public static final String COLUMN_NAME_ENTRY = "entry";
     }
 }

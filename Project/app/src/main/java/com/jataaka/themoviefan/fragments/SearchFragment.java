@@ -1,6 +1,7 @@
 package com.jataaka.themoviefan.fragments;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,6 +26,7 @@ import com.jataaka.themoviefan.HttpRequestQueue;
 import com.jataaka.themoviefan.MainActivity;
 import com.jataaka.themoviefan.MovieDetailActivity;
 import com.jataaka.themoviefan.R;
+import com.jataaka.themoviefan.data.DbActions;
 import com.jataaka.themoviefan.model.Movie;
 
 import org.json.JSONArray;
@@ -42,6 +46,9 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Li
     private Button search;
     private AutoCompleteTextView searchText;
     private String queryText;
+    private ArrayList<String> ENTRIES = new ArrayList<>();
+    ArrayAdapter<String> autocompleteAdapter;
+    DbActions db;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -58,12 +65,20 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Li
         super.onViewCreated(view, savedInstanceState);
 
         this.searchText = (AutoCompleteTextView) view.findViewById(R.id.searchTxt);
+        this.searchText.setOnClickListener(this);
         this.search = (Button) view.findViewById(R.id.searchBtn);
         this.search.setOnClickListener(this);
 
         this.mainActivity = (MainActivity) view.getContext();
         this.currentPage = 1;
         this.movieList = new ArrayList<Movie>();
+
+        autocompleteAdapter = new ArrayAdapter<String>(this.mainActivity,android.R.layout.simple_dropdown_item_1line,ENTRIES);
+        this.searchText.setAdapter(autocompleteAdapter);
+        autocompleteAdapter.notifyDataSetChanged();
+
+        db = new DbActions(view.getContext().getApplicationContext());
+        getSqliteAutocompleteData();
 
         this.listView = (ListView) view.findViewById(R.id.list);
         this.adapter = new CustomListAdapter(this.mainActivity, this.movieList);
@@ -152,7 +167,24 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Li
                 this.searchText.setText("");
                 this.movieList.clear();
                 this.getData();
+
+                if (!ENTRIES.contains((String)this.queryText)){
+                    db.addRecord(this.queryText, this.mainActivity.user.getUsername());
+                    autocompleteAdapter.add(this.queryText);
+                }
                 break;
+        }
+    }
+
+    public void getSqliteAutocompleteData(){
+        Cursor resultData = db.getValues(this.mainActivity.user.getUsername());
+        if (resultData != null) {
+            if (resultData.moveToFirst()) {
+                do {
+                    ENTRIES.add(resultData.getString(0));
+                } while (resultData.moveToNext());
+            }
+            resultData.close();
         }
     }
 }

@@ -23,11 +23,8 @@ public class DbInit extends SQLiteOpenHelper {
         final String SQL_CREATE_FAN_NOTES_TABLE =
                 "CREATE TABLE if not exists " + DbContract.FanNotesEntry.TABLE_NAME + " (" +
                         DbContract.FanNotesEntry._ID + " INTEGER PRIMARY KEY," +
-                        DbContract.FanNotesEntry.COLUMN_NAME_MOVIE_ID + " TEXT," +
                         DbContract.FanNotesEntry.COLUMN_NAME_USER + " TEXT," +
-                        DbContract.FanNotesEntry.COLUMN_NAME_DATE_ADDED + " TEXT," +
-                        DbContract.FanNotesEntry.COLUMN_NAME_RATING + " TEXT," +
-                        DbContract.FanNotesEntry.COLUMN_NAME_IMG_URL + " INTEGER" +
+                        DbContract.FanNotesEntry.COLUMN_NAME_ENTRY + " TEXT" +
                         " )";
 
         db.execSQL(SQL_CREATE_FAN_NOTES_TABLE);
